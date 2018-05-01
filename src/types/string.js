@@ -1,5 +1,3 @@
-import ByteBuffer from 'bytebuffer';
-
 export default {
   fromBuffer: (byteBuffer) => {
     return byteBuffer.readVString();
