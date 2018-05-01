@@ -19,7 +19,7 @@ export default {
     let offset = Long.fromString(hex, true, 16);
     let value = "";
 
-    for (let i = 0; i < 13; i++) {
+    for (let i = 0; i < 12; i++) {
       const index = charMap[offset.and(i === 0 ? fourBits : fiveBits)];
       offset = offset.shiftRight(i === 0 ? 4 : 5);
       value = index + value;
@@ -29,11 +29,10 @@ export default {
   },
   appendBuffer: (byteBuffer, value) => {
     value = String(value);
-    const length = min([value.length, 13]);
     let bitStr = '';
-    for (let i = 0; i < 13; i++) {
+    for (let i = 0; i < 12; i++) {
       const index = i < value.length ? charMap.indexOf(value[i]) : 0;
-      const bitLen = i < 12 ? 5 : 4;
+      const bitLen = i < 11 ? 5 : 4;
       let bits = Number(index).toString(2);
       bits = '0'.repeat(bitLen - bits.length) + bits;
       bitStr += bits;
