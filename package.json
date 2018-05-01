@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "bytebuffer": "^5.0.1",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "moment": "^2.22.1"
   },
   "devDependencies": {
     "nwb": "0.21.x"
