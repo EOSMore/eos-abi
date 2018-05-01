@@ -1,5 +1,4 @@
 import { Long } from 'bytebuffer';
-import min from 'lodash/min';
 
 const charMap = '.12345abcdefghijklmnopqrstuvwxyz';
 
