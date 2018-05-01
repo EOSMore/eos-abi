@@ -14,11 +14,19 @@ class ABI {
   }
   encode(data = {}) {
     const byteBuffer = new ByteBuffer(ByteBuffer.DEFAULT_CAPACITY, ByteBuffer.LITTLE_ENDIAN);
-    forEach(data, (value, field) => {
-      const type = has(this.schema, field) ? this.schema[field] : this.types.string;
+    forEach(this.schema, (type, field) => {
+      const value = has(data, field) ? data[field] : null;
       type.appendBuffer(byteBuffer, value);
     });
-    return byteBuffer.copy(0, byteBuffer.offset);
+    return Buffer.from(byteBuffer.copy(0, byteBuffer.offset).toBinary(), 'binary');
+  }
+  decode(buffer) {
+    const byteBuffer = ByteBuffer.fromBinary(buffer.toString('binary'), ByteBuffer.LITTLE_ENDIAN);
+    const value = {};
+    forEach(this.schema, (type, field) => {
+      value[field] = type.fromBuffer(byteBuffer);
+    });
+    return value;
   }
 }
 
