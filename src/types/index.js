@@ -1,3 +1,4 @@
+import name from './name';
 import string from './string';
 import uint8 from './uint8';
 import uint16 from './uint16';
@@ -6,6 +7,7 @@ import uint64 from './uint64';
 import uint128 from './uint128';
 
 const types = {
+  name,
   string,
   uint8,
   uint16,
