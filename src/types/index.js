@@ -1,4 +1,5 @@
 import name from './name';
+import public_key from './public_key';
 import string from './string';
 import time from './time';
 import uint8 from './uint8';
@@ -9,6 +10,7 @@ import uint128 from './uint128';
 
 const types = {
   name,
+  public_key,
   string,
   time,
   uint8,
