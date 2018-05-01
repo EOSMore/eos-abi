@@ -1,1 +1,5 @@
-export default 'Welcome to eos-abi'
+import ABI from './abi';
+
+export {
+  ABI
+}

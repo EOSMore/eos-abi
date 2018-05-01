@@ -1,9 +1,13 @@
 import expect from 'expect'
 
-import message from 'src/index'
+import { ABI } from 'src'
 
 describe('Module template', () => {
-  it('displays a welcome message', () => {
-    expect(message).toContain('Welcome to eos-abi')
+  it('test initialize abi', () => {
+    const abi = new ABI({
+      number: 'uint8'
+    });
+    console.log(abi.encode({ number: 21 }))
+    expect(1).toEqual(1)
   })
 })

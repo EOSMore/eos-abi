@@ -16,6 +16,8 @@
     "test:watch": "nwb test --server"
   },
   "dependencies": {
+    "bytebuffer": "^5.0.1",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "nwb": "0.21.x"
