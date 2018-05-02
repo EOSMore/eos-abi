@@ -1,3 +1,5 @@
+import mapValues from 'lodash/mapValues';
+
 import int8 from './int8';
 import int16 from './int16';
 import int32 from './int32';
@@ -28,4 +30,8 @@ const types = {
   uint128
 };
 
-export default types;
+const defaultProps = {
+  isType: true
+};
+
+export default mapValues(types, type => ({ ...type, ...defaultProps }));
