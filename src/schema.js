@@ -4,19 +4,19 @@ import has from 'lodash/has';
 import set from 'lodash/set';
 import isObject from 'lodash/isObject';
 import ByteBuffer from 'bytebuffer';
-import types from './types';
+import Types from './types';
 
-const mapTypes = (schema, candidateTypes) => {
-  return mapValues(schema, item => {
+const mapTypes = (struct, candidateTypes) => {
+  return mapValues(struct, item => {
     if (isObject(item)) {
       return mapTypes(item, candidateTypes);
     }
-    return has(candidateTypes, item) ? candidateTypes[item] : types.string;
+    return has(candidateTypes, item) ? candidateTypes[item] : Types.string;
   });
 };
 
-const appendBuffer = (byteBuffer, schema, data) => {
-  forEach(schema, (item, key) => {
+const appendBuffer = (byteBuffer, struct, data) => {
+  forEach(struct, (item, key) => {
     const value = has(data, key) ? data[key] : null;
     if (item.isType) {
       item.appendBuffer(byteBuffer, value);
@@ -26,9 +26,9 @@ const appendBuffer = (byteBuffer, schema, data) => {
   });
 };
 
-const fromBuffer = (byteBuffer, schema) => {
+const fromBuffer = (byteBuffer, struct) => {
   const value = {};
-  forEach(schema, (item, key) => {
+  forEach(struct, (item, key) => {
     if (item.isType) {
       set(value, key, item.fromBuffer(byteBuffer));
     } else {
@@ -38,26 +38,26 @@ const fromBuffer = (byteBuffer, schema) => {
   return value;
 };
 
-class ABI {
-  constructor(schema = {}, customTypes = {}) {
-    this.types = { ...types, ...customTypes };
-    this.schema = mapTypes(schema, this.types);
+class Schema {
+  constructor(struct = {}, types = {}) {
+    this.types = types;
+    this.struct = mapTypes(struct, this.types);
   }
-  getSchema() {
-    return this.schema;
+  getStruct() {
+    return this.struct;
   }
   serialize(data = {}) {
     const byteBuffer = new ByteBuffer(ByteBuffer.DEFAULT_CAPACITY, ByteBuffer.LITTLE_ENDIAN);
-    appendBuffer(byteBuffer, this.schema, data);
+    appendBuffer(byteBuffer, this.struct, data);
     return Buffer.from(byteBuffer.copy(0, byteBuffer.offset).toBinary(), 'binary');
   }
   unserialize(buffer) {
     const byteBuffer = ByteBuffer.fromBinary(buffer.toString('binary'), ByteBuffer.LITTLE_ENDIAN);
-    return fromBuffer(byteBuffer, this.schema);
+    return fromBuffer(byteBuffer, this.struct);
   }
   normalize(data = {}) {
     return this.unserialize(this.serialize(data));
   }
 }
 
-export default ABI;
+export default Schema;
