@@ -1,3 +1,3 @@
-import int from './base/int';
+import bignum from './base/bignum';
 
-export default int(128);
+export default bignum(128);
