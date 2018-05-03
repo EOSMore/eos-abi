@@ -1,6 +1,7 @@
 import mapValues from 'lodash/mapValues';
 
 import bytes from './bytes';
+import float64 from './float64';
 import int8 from './int8';
 import int16 from './int16';
 import int32 from './int32';
@@ -17,6 +18,7 @@ import uint128 from './uint128';
 
 const types = {
   bytes,
+  float64,
   int8,
   int16,
   int32,
