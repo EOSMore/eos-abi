@@ -15,6 +15,7 @@ import uint16 from './uint16';
 import uint32 from './uint32';
 import uint64 from './uint64';
 import uint128 from './uint128';
+import varuint32 from './varuint32';
 
 const types = {
   bytes,
@@ -31,7 +32,8 @@ const types = {
   uint16,
   uint32,
   uint64,
-  uint128
+  uint128,
+  varuint32
 };
 
 const defaultProps = {
