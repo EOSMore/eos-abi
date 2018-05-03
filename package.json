@@ -1,7 +1,7 @@
 {
   "name": "eos-abi",
-  "version": "1.0.0",
-  "description": "Describe eos-abi here",
+  "version": "0.1.0",
+  "description": "eos abi format javascript libraries",
   "main": "lib/index.js",
   "files": [
     "es",
@@ -28,5 +28,5 @@
   "author": "",
   "homepage": "",
   "license": "MIT",
-  "repository": ""
+  "repository": "https://github.com/EOSMore/eos-abi"
 }
